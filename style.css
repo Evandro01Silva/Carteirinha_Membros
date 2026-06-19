@@ -1,0 +1,153 @@
+/* ===================================================
+   1. RESET E ESTRUTURA DA PÁGINA (IGUAL PARA TODAS)
+   =================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #e0e5ec;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Painel de Controle Superior */
+.controles {
+    background: #ffffff;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.botoes button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #004a99;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+.area-de-trabalho {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    overflow: auto; 
+}
+
+/* A Folha A4 */
+.folha-a4 {
+    position: relative;
+    width: 794px;  
+    height: 1123px; 
+    min-width: 794px; 
+    min-height: 1123px; 
+    background-color: #ffffff;
+    background-image: url('CARTEIRINHA_MEMBROS.jpg'); /* Nome da nova imagem */
+    background-size: 100% 100%;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* O Bloco de cada Carteirinha */
+.carteirinha {
+    position: absolute;
+    width: 397px;  /* Metade exata da largura da folha */
+    height: 561px; /* Metade exata da altura da folha */
+}
+
+/* Estilo Base dos Textos */
+.campo {
+    position: absolute;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: #000;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-style: italic;
+    text-align: center;
+}
+
+.campo::placeholder { color: rgba(0,0,0,0.4); }
+
+.upload-foto { display: none; }
+
+.preview-foto {
+    width: 100%;
+    height: 100%;
+    border: 1px dashed #004a99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #004a99;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    background-size: cover;
+    background-position: center;
+}
+
+
+/* ===================================================
+   2. POSIÇÃO DOS 4 BLOCOS PRINCIPAIS NA FOLHA A4
+   (Se o fundo impresso estiver torto, ajuste aqui)
+   =================================================== */
+.cart-1 { top: 0px;   left: 0px; }   /* Superior Esquerda */
+.cart-2 { top: 1px;   left: 375px; } /* Superior Direita */
+.cart-3 { top: 554px; left: 0px; }   /* Inferior Esquerda */
+.cart-4 { top: 554px; left: 375px; } /* Inferior Direita */
+
+
+/* ===================================================
+   3. COORDENADAS INTERNAS DOS CAMPOS (MOLDE ÚNICO)
+   (O que você mudar aqui muda nas 4 carteirinhas)
+   =================================================== */
+.nome         { top: 115px; left: 45px;  width: 340px; } 
+
+.sede         { top: 149px; left: 45px;  width: 160px; } 
+.uf-sede      { top: 149px; left: 218px; width: 40px;  } 
+
+.natural      { top: 184px; left: 40px;  width: 168px; } 
+.uf-natural   { top: 184px; left: 218px; width: 40px;  } 
+
+.doc          { top: 217px; left: 100px; width: 120px; } 
+.rg           { top: 210px; left: 80px;  width: 160px; } 
+
+.recebido     { top: 251px; left: 40px;  width: 178px; } 
+
+/* Espaço da Foto */
+.area-foto {
+    position: absolute;
+    top: 145px;  
+    left: 282px; 
+    width: 90px; 
+    height: 120px; 
+    cursor: pointer;
+}
+
+
+/* ===================================================
+   4. REGRAS DE IMPRESSÃO INDISPENSÁVEIS
+   =================================================== */
+@media print {
+    .controles, ::-webkit-scrollbar { display: none !important; }
+    @page { margin: 0; size: A4 portrait; }
+    body { background: none; padding: 0; }
+    .area-de-trabalho { padding: 0; overflow: hidden; }
+    
+    .folha-a4 { 
+        box-shadow: none; 
+        -webkit-print-color-adjust: exact !important; 
+        print-color-adjust: exact !important; 
+    }
+    
+    .preview-foto { border: none; color: transparent; }
+}
